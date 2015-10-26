@@ -25,7 +25,7 @@ class Order
     @invoice.itemize_bill
   end
 
-  def place_order(phone_num=ENV[PNUM])
+  def place_order(phone_num=ENV['PNUM'])
     @invoice.place_order(phone_num)
   end
 

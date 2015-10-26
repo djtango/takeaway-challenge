@@ -24,9 +24,12 @@ begin_order = "Thank you for hitting up Deon Dumplings, what restaurant would yo
 
 unrecognised_command = "Thank you for hitting up Deon Dumplings, your favourite double Ds. Text ordering is now supported, text 'order' to start!"
 
+sms_order_placed = "Order placed, please await confirmation..."
+
+
 def present_order(order)
   string = ''
-  order.current_order.each {|dish| string += "#{dish.name}: #{dish.price}" }
+  order.current_order.each {|dish| string += "#{dish.name}: #{dish.price}\n" }
   string
 end
 def text_menu(menu)
@@ -59,6 +62,7 @@ get '/sms-quickstart' do
     elsif body == 'place_order'
       $order.confirm_order
       $order.place_order(ENV['PNUM'])
+      r.Message(sms_order_placed)
     else
       r.Message(unrecognised_command)
     end
