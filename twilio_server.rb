@@ -11,10 +11,10 @@ require './lib/invoice'
 require './twilio'
 
 menus = {
-  :meatliquor => [{:name=>:nigiri_sushi, :price=>13.99},
+  :nobu => [{:name=>:nigiri_sushi, :price=>13.99},
                   {:name=>:tonkotsu_ramen, :price=>9.95},
                   {:name=>:teriyaki_salmon, :price=>8.80}],
-  :nobu => [{:name=>:dead_hippy, :price=>8.99},
+  :meatliquor => [{:name=>:dead_hippy, :price=>8.99},
               {:name=>:black_palace, :price=>9.95},
               {:name=>:buffalo_chicken, :price=>8.80},
               {:name=>:cheese_fries, :price=>5.50}]
