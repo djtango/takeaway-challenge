@@ -20,16 +20,18 @@ menus = {
               {:name=>:cheese_fries, :price=>5.50}]
 }
 
-begin_order = "Thank you for hitting up Deon Dumplings, what restaurant would you like to order from? '\n'Please reply 'meatliquor' for Meat Liquor, "Nobu" for Nobu."
+begin_order = "Thank you for hitting up Deon Dumplings, what restaurant would you like to order from? \nPlease reply 'meatliquor' for Meat Liquor, 'nobu' for Nobu."
 
 unrecognised_command = "Thank you for hitting up Deon Dumplings, your favourite double Ds. Text ordering is now supported, text 'order' to start!"
 
 
 def text_menu(menu)
   menu_txt = ''
-  menu.each {|key,value| menu_txt + "#{value}" +
-    key == :price ? "'\n'" : " "}
+  menu.each {|dish| dish.each {|key,value| menu_txt = "#{menu_txt}#{value}" + key_or_value(key,value) } }
   menu_txt
+end
+def key_or_value(key,value)
+    key == :price ? "\n" : " "
 end
 
 get '/sms-quickstart' do
