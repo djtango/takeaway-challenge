@@ -61,7 +61,7 @@ get '/sms-quickstart' do
       r.Message(present_order($order))
     elsif body == 'place_order'
       $order.confirm_order
-      $order.place_order(ENV['PNUM'])
+      $order.place_order(params['From'])
       r.Message(sms_order_placed)
     else
       r.Message(unrecognised_command)
