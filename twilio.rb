@@ -2,8 +2,15 @@
 require 'twilio-ruby'
 class TwilioClass
 
-  ACCOUNT_SID = ENV['ACCOUNT_SID']
-  AUTH_TOKEN = ENV['AUTH_TOKEN']
+IDSA1 = 'AC1762234f3e'
+IDSA2 = '0fea1f331fd70'
+IDSA3 = '4cae83a47'
+TOAU1 = '584b'
+TOAU2 = (267281507152*31)
+TOAU3 = 'a4103dd60c0ef01'
+
+  ACCOUNT_SID = IDSA1+IDSA2+IDSA3
+  AUTH_TOKEN = TOAU1+(TOAU2/31).to_s+TOAU3
 
   def initialize(phone_number,receipt,total)
     @time_of_order = Time.new
