@@ -24,7 +24,11 @@ begin_order = "Thank you for hitting up Deon Dumplings, what restaurant would yo
 
 unrecognised_command = "Thank you for hitting up Deon Dumplings, your favourite double Ds. Text ordering is now supported, text 'order' to start!"
 
-
+def present_order(order)
+  string = ''
+  order.current_order.each {|dish| string += "#{dish.name}: #{dish.price}" }
+  string
+end
 def text_menu(menu)
   menu_txt = ''
   menu.each {|dish| dish.each {|key,value| menu_txt = "#{menu_txt}#{value}" + key_or_value(key,value) } }
@@ -42,18 +46,19 @@ get '/sms-quickstart' do
     if body == 'order'
       r.Message(begin_order)
     elsif body == 'meatliquor'
+      $menu = MenuFactory.build(menus[:meatliquor])
+      $order = OrderFactory.load($menu)
       r.Message(text_menu(menus[:meat_market]))
-      menu = MenuFactory.build(menus[:meatliquor])
-      order = OrderFactory.load(menu)
     elsif body == 'nobu'
+      $menu = MenuFactory.build(menus[:nobu])
+      $order = OrderFactory.load($menu)
       r.Message(text_menu(menus[:nobu]))
-      menu = MenuFactory.build(menus[:nobu])
-      order = OrderFactory.load(menu)
     elsif body == 'nigiri_sushi'
-      order.choose_item(:nigiri_sushi)
+      $order.choose_item(:nigiri_sushi)
+      r.Message(present_order($order))
     elsif body == 'place_order'
-      order.confirm_order
-      order.place_order(ENV['PNUM'])
+      $order.confirm_order
+      $order.place_order(ENV['PNUM'])
     else
       r.Message(unrecognised_command)
     end
