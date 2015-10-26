@@ -42,13 +42,13 @@ get '/sms-quickstart' do
     if body == 'order'
       r.Message(begin_order)
     elsif body == 'meatliquor'
+      r.Message(text_menu(menus[:meat_market]))
       menu = MenuFactory.build(menus[:meatliquor])
       order = OrderFactory.load(menu)
-      r.Message(text_menu(menus[:meat_market]))
     elsif body == 'nobu'
+      r.Message(text_menu(menus[:nobu]))
       menu = MenuFactory.build(menus[:nobu])
       order = OrderFactory.load(menu)
-      r.Message(text_menu(menus[:nobu]))
     elsif body == 'nigiri_sushi'
       order.choose_item(:nigiri_sushi)
     elsif body == 'place_order'
