@@ -3,7 +3,7 @@ require 'order'
 describe Order do
 
   let(:menu) {double(:menu)}
-  let(:dish) {double(:dish)}
+  let!(:dish) {double(:dish)}
   let(:invoice) {double(:invoice)}
   let(:invoice_klass) {double(:invoice_klass)}
   let(:twilio_klass) {double(:twilio_klass)}
