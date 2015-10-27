@@ -72,7 +72,7 @@ get '/sms-quickstart' do
       r.Message(sms_order_placed)
     elsif body == 'confirm'
       $order.confirm_order
-      r.Message(sms_confirm_order)
+      r.Message(sms_confirm_order($order))
     else
       r.Message(unrecognised_command)
     end
