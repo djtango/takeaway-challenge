@@ -35,12 +35,12 @@ def confirmed_order_lines(order)
   ConfirmOrderLines.calc(order)
 end
 def present_order(order)
-  string = 'Your order so far is:'
-  order.current_order.each {|dish| string += "#{dish.name}: #{dish.price}\n" }
+  string = "Your order so far is:\n"
+  order.current_order.each {|dish| string += "#{dish.name} - #{dish.price}\n" }
   string
 end
 def text_menu(menu)
-  menu_txt = "Menu:\nPlease reply with the name of the dish to add that item to your order. Text 'place_order' separately when you're done ordering."
+  menu_txt = "Menu:\nPlease reply with the name of the dish to add that item to your order. Text 'place_order' separately when you're done ordering.\n"
   menu.each {|dish| dish.each {|key,value| menu_txt = "#{menu_txt}#{value}" + key_or_value(key,value) } }
   menu_txt
 end
